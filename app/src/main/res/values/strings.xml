@@ -7,7 +7,7 @@
     <string name="height">Height</string>
     <string name="hole">Hole</string>
     <string name="textForBricks">Enter bricks</string>
-    <string name="amount">amount</string>
+    <string name="amount">Amount</string>
     <string name="size">size</string>
     <string name="add">add</string>
     <string name="delete">delete</string>

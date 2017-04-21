@@ -103,11 +103,11 @@
 
 
     <EditText
-        android:id="@+id/sizeOfBricks"
+        android:id="@+id/amountOfBricks"
         android:layout_alignTop="@id/add"
         android:layout_width="70dp"
         android:layout_height="30dp"
-        android:hint="@string/size"
+        android:hint="@string/amount"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/background_for_edit_view"
@@ -115,16 +115,16 @@
         android:inputType="number"
         />
     <EditText
-        android:id="@+id/amountOfBricks"
+        android:id="@+id/sizeOfBricks"
         android:layout_marginTop="10dp"
         android:layout_width="70dp"
         android:layout_height="30dp"
         android:layout_below="@id/textForBricks"
-        android:layout_toLeftOf="@id/sizeOfBricks"
+        android:layout_toLeftOf="@id/amountOfBricks"
         android:layout_alignTop="@id/add"
         android:layout_marginRight="35dp"
         android:inputType="number"
-        android:hint="@string/amount"
+        android:hint="@string/width"
         android:background="@drawable/background_for_edit_view" />
 
     <Button
@@ -132,10 +132,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textForBricks"
-        android:layout_toRightOf="@id/sizeOfBricks"
+        android:layout_toRightOf="@id/amountOfBricks"
         android:layout_marginLeft="35dp"
         android:text="@string/add"
-        android:textSize="17dp"
+        android:textSize="15dp"
         android:textStyle="italic" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listOfBricks"

@@ -68,7 +68,7 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Integer key = keys.get(position);
-        holder.sizeAndAmountOfBricks.setText("Size:"+key+",   Amount: "+mapOfBricks.get(key));
+        holder.sizeAndAmountOfBricks.setText("Size:"+key+"   Amount: "+mapOfBricks.get(key));
     }
 
     @Override
@@ -77,6 +77,7 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
     }
 
     public void updateData(Integer size, Integer amount) {
+        keys.remove(size);
         keys.add(size);
         mapOfBricks.put(size,amount);
         notifyDataSetChanged();
