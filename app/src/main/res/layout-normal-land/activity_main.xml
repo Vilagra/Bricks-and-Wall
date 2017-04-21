@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="3dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="3dp"
+    tools:context="com.example.wallandbricks.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/buttonPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/verification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="@string/verification" />
+
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="@string/clear" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textForWall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonPanel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:textSize="20dp"
+        android:text="@string/textForWall" />
+
+    <TextView
+        android:id="@+id/widthText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textForWall"
+        android:layout_alignRight="@id/textForWall"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/width"
+        android:textSize="17dp"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/heightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textForWall"
+        android:layout_alignLeft="@id/textForWall"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/height"
+        android:textSize="17dp"
+        android:textStyle="bold|italic" />
+
+
+
+    <EditText
+        android:layout_marginTop="1dp"
+        android:id="@+id/heightWall"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:inputType="number"
+        android:layout_below="@id/heightText"
+        android:layout_alignLeft="@id/heightText"
+        android:background="@drawable/background_for_edit_view"
+        />
+    <EditText
+        android:layout_marginTop="1dp"
+        android:id="@+id/widthWall"
+        android:layout_width="60dp"
+        android:inputType="number"
+        android:layout_height="30dp"
+        android:layout_below="@id/widthText"
+        android:layout_alignLeft="@id/widthText"
+        android:background="@drawable/background_for_edit_view"
+        />
+
+    <TextView
+        android:id="@+id/textForBricks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/heightWall"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:textSize="20dp"
+        android:text="@string/textForBricks" />
+
+
+    <EditText
+        android:id="@+id/sizeOfBricks"
+        android:layout_alignTop="@id/add"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:hint="@string/size"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/background_for_edit_view"
+        android:layout_below="@+id/textForBricks"
+        android:inputType="number"
+        />
+    <EditText
+        android:id="@+id/amountOfBricks"
+        android:layout_marginTop="5dp"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/textForBricks"
+        android:layout_toLeftOf="@id/sizeOfBricks"
+        android:layout_alignTop="@id/add"
+        android:layout_marginRight="35dp"
+        android:inputType="number"
+        android:hint="@string/amount"
+        android:background="@drawable/background_for_edit_view" />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/textForBricks"
+        android:layout_toRightOf="@id/sizeOfBricks"
+        android:layout_marginLeft="35dp"
+        android:text="@string/add"
+        android:textSize="17dp"
+        android:textStyle="italic" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listOfBricks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add">
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Wall and Bricks</string>
+    <string name="verification">Verification</string>
+    <string name="clear">Clear all</string>
+    <string name="textForWall">Enter wall configuration</string>
+    <string name="width">Width</string>
+    <string name="height">Height</string>
+    <string name="hole">Hole</string>
+    <string name="textForBricks">Enter bricks</string>
+    <string name="amount">amount</string>
+    <string name="size">size</string>
+    <string name="add">add</string>
+    <string name="delete">delete</string>
+</resources>
