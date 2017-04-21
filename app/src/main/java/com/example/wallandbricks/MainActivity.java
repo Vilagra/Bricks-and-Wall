@@ -1,6 +1,7 @@
 package com.example.wallandbricks;
 
 import android.app.LoaderManager;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Loader;
 import android.os.Bundle;
@@ -8,9 +9,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,15 +21,18 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, LoaderManager.LoaderCallbacks<Boolean> {
 
-    EditText etWidthOfWall;
-    EditText etHeigthOfWall;
-    EditText etAmountOfBricks;
-    EditText etWidthOfBricks;
-    Button bAdd;
-    Button bVerification;
-    Button bClear;
+    private EditText etWidthOfWall;
+    private EditText etHeigthOfWall;
+    private EditText etAmountOfBricks;
+    private EditText etWidthOfBricks;
+    private Button bAdd;
+    private Button bVerification;
+    private Button bClear;
 
-    AdapterOfBricks adapterOfBricks;
+    boolean isNewLoad =false;
+
+    private AdapterOfBricks adapterOfBricks;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setAdapter(adapterOfBricks);
 
         getLoaderManager().initLoader(Constants.LOADER_VER_ID, null, this);
+
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setTitle(getString(R.string.verification));
+
     }
 
     @Override
@@ -65,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.verification:
                 Bundle bundle= getBundleWithData();
                 getLoaderManager().restartLoader(Constants.LOADER_VER_ID,bundle,this).forceLoad();
+                progressDialog.show();
+                isNewLoad=true;
                 break;
         }
     }
@@ -88,22 +100,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onLoadFinished(Loader<Boolean> loader, Boolean data) {
-        final AlertDialog.Builder alert= new AlertDialog.Builder(this);
-        String msg;
-        if(data){
-            msg="YES";
-        }else {
-            msg="NO";
+        if(isNewLoad) {
+            progressDialog.dismiss();
+            final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            String msg;
+            if (data) {
+                msg = "YES";
+            } else {
+                msg = "NO";
+            }
+            alert.setTitle("Result").
+                    setMessage(msg).
+                    setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            AlertDialog dialog = alert.show();
+            TextView messageText = (TextView) dialog.findViewById(android.R.id.message);
+            messageText.setGravity(Gravity.CENTER);
+            dialog.show();
+            loader.reset();
         }
-        alert.setTitle("Result").
-                setMessage(msg).
-                setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alert.show();
     }
 
     @Override

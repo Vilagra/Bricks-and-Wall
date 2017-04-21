@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Vilagra on 21.04.2017.
@@ -25,11 +26,12 @@ public class VerificationLoader extends AsyncTaskLoader<Boolean> {
 
     @Override
     public Boolean loadInBackground() {
-/*        ProgressDialog progressDialog=new ProgressDialog(this.getContext());
-        progressDialog.setTitle(this.getContext().getString(R.string.verification));
-        progressDialog.show();*/
         boolean res=verification.check();
-        //progressDialog.dismiss();
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return res;
     }
 
