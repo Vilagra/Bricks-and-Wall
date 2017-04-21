@@ -28,6 +28,14 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
         this.keys = keys;
     }
 
+    public ArrayList<Integer> getKeys() {
+        return keys;
+    }
+
+    public Map<Integer, Integer> getMapOfBricks() {
+        return mapOfBricks;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         Button buttonDelete;
         TextView sizeAndAmountOfBricks;
