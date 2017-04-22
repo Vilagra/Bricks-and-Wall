@@ -26,13 +26,7 @@ public class VerificationLoader extends AsyncTaskLoader<Boolean> {
 
     @Override
     public Boolean loadInBackground() {
-        boolean res=verification.check();
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return res;
+        return verification.check();
     }
 
     public Verification getVerificationFromBundle(Bundle bundle){

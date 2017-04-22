@@ -22,6 +22,16 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
 
     Map<Integer, Integer> mapOfBricks;
     List<Integer> keys;
+    DataIsEmptyListener dataIsEmptyListener;
+
+    interface DataIsEmptyListener{
+        void notifyDataIsEmpty(boolean b);
+    }
+
+
+    public void setDataIsEmptyListener(DataIsEmptyListener dataIsEmptyListener) {
+        this.dataIsEmptyListener = dataIsEmptyListener;
+    }
 
     public AdapterOfBricks() {
         mapOfBricks= new HashMap<>();
@@ -62,6 +72,9 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
             keys.remove(position);
             mapOfBricks.remove(key);
             AdapterOfBricks.this.notifyDataSetChanged();
+            if(mapOfBricks.isEmpty()){
+                dataIsEmptyListener.notifyDataIsEmpty(true);
+            }
         }
     }
 

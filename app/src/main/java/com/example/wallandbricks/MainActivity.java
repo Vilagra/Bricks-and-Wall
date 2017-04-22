@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, LoaderManager.LoaderCallbacks<Boolean>, TextView.OnEditorActionListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, LoaderManager.LoaderCallbacks<Boolean>,AdapterOfBricks.DataIsEmptyListener {
 
     private EditText etWidthOfWall;
     private EditText etHeigthOfWall;
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.listOfBricks);
         adapterOfBricks = new AdapterOfBricks();
+        adapterOfBricks.setDataIsEmptyListener(this);
         if(savedInstanceState!=null){
             recoverState(savedInstanceState);
         }
@@ -173,20 +174,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return bundle;
     }
 
-
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                actionId == EditorInfo.IME_ACTION_DONE ) {
-            if (!event.isShiftPressed()) {
-                // the user is done typing.
-                updateStateOfButton();
-                return true; // consume.
-            }
-        }
-        return false;
-    }
-
     private void updateStateOfButton() {
         boolean isEmptyWidthWall = etWidthOfWall.getText().toString().equals("");
         boolean isEmptyHeigthWall = etHeigthOfWall.getText().toString().equals("");
@@ -197,5 +184,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bClear.setEnabled(!isEmptyWidthWall||!isEmptyHeigthWall||!isMapOfBricksEmpty||!isEmptyAmount||!isEmptyWidtOfBricks);
         bAdd.setEnabled(!isEmptyAmount&&!isEmptyWidtOfBricks);
 
+    }
+
+    @Override
+    public void notifyDataIsEmpty(boolean b) {
+        if(b) {
+            updateStateOfButton();
+        }
     }
 }
