@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etWidthOfWall.addTextChangedListener(textWatcher);
         etAmountOfBricks.addTextChangedListener(textWatcher);
 
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         bAdd = (Button) findViewById(R.id.add);
         bClear = (Button) findViewById(R.id.clear);
@@ -102,6 +104,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 updateStateOfButton();
                 break;
             case R.id.clear:
+                etHeigthOfWall.setText("");
+                etWidthOfWall.setText("");
+                etAmountOfBricks.setText("");
+                etWidthOfBricks.setText("");
+                adapterOfBricks.setKeys(new ArrayList<Integer>());
+                adapterOfBricks.setMapOfBricks(new HashMap<Integer, Integer>());
+                adapterOfBricks.notifyDataSetChanged();
                 break;
             case R.id.verification:
                 Bundle bundle= getBundleWithData();
