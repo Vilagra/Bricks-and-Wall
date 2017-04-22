@@ -25,7 +25,7 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
     DataIsEmptyListener dataIsEmptyListener;
 
     interface DataIsEmptyListener{
-        void notifyDataIsEmpty(boolean b);
+        void notifyDataIsEmpty(boolean b); //listener watches when data becomes empty
     }
 
 
@@ -66,7 +66,7 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View v) {               //delete bricks by this position
             int position = getAdapterPosition();
             Integer key = keys.get(position);
             keys.remove(position);
@@ -97,7 +97,7 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
         return keys.size();
     }
 
-    public void updateData(Integer size, Integer amount) {
+    public void updateData(Integer size, Integer amount) {  //input new data, if data already exists it is replaced
         keys.remove(size);
         keys.add(size);
         mapOfBricks.put(size,amount);
