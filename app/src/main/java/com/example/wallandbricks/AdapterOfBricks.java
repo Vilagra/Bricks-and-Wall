@@ -21,14 +21,22 @@ import java.util.TreeMap;
 public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHolder> {
 
     Map<Integer, Integer> mapOfBricks;
-    ArrayList<Integer> keys;
+    List<Integer> keys;
 
-    public AdapterOfBricks(Map<Integer, Integer> mapOfBricks, ArrayList<Integer> keys) {
-        this.mapOfBricks = mapOfBricks;
+    public AdapterOfBricks() {
+        mapOfBricks= new HashMap<>();
+        keys=new ArrayList<>();
+    }
+
+    public void setKeys(ArrayList<Integer> keys) {
         this.keys = keys;
     }
 
-    public ArrayList<Integer> getKeys() {
+    public void setMapOfBricks(Map<Integer, Integer> mapOfBricks) {
+        this.mapOfBricks = mapOfBricks;
+    }
+
+    public List<Integer> getKeys() {
         return keys;
     }
 

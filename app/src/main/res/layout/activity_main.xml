@@ -78,6 +78,7 @@
         android:layout_width="60dp"
         android:layout_height="30dp"
         android:inputType="number"
+        android:imeOptions="actionSend"
         android:layout_below="@id/heightText"
         android:layout_alignLeft="@id/heightText"
         android:background="@drawable/background_for_edit_view"
