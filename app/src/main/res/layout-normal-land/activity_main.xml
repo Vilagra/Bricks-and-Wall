@@ -76,6 +76,7 @@
         android:layout_width="60dp"
         android:layout_height="25dp"
         android:inputType="number"
+        android:paddingLeft="5dp"
         android:layout_below="@id/heightText"
         android:layout_alignLeft="@id/heightText"
         android:background="@drawable/background_for_edit_view"
@@ -86,6 +87,7 @@
         android:layout_width="60dp"
         android:inputType="number"
         android:layout_height="25dp"
+        android:paddingLeft="5dp"
         android:layout_below="@id/widthText"
         android:layout_alignLeft="@id/widthText"
         android:background="@drawable/background_for_edit_view"
@@ -112,6 +114,7 @@
         android:background="@drawable/background_for_edit_view"
         android:layout_below="@+id/textForBricks"
         android:hint="@string/amount"
+        android:paddingLeft="5dp"
         android:inputType="number"
         />
     <EditText
@@ -124,6 +127,7 @@
         android:layout_alignTop="@id/add"
         android:layout_marginRight="35dp"
         android:inputType="number"
+        android:paddingLeft="5dp"
         android:hint="@string/width"
         android:background="@drawable/background_for_edit_view" />
 

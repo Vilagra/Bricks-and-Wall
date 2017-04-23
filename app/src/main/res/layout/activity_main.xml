@@ -81,6 +81,7 @@
         android:imeOptions="actionSend"
         android:layout_below="@id/heightText"
         android:layout_alignLeft="@id/heightText"
+        android:paddingLeft="5dp"
         android:background="@drawable/background_for_edit_view"
         />
     <EditText
@@ -91,6 +92,7 @@
         android:layout_height="30dp"
         android:layout_below="@id/widthText"
         android:layout_alignLeft="@id/widthText"
+        android:paddingLeft="5dp"
         android:background="@drawable/background_for_edit_view"/>
     <TextView
         android:id="@+id/textForBricks"
@@ -114,6 +116,7 @@
         android:background="@drawable/background_for_edit_view"
         android:layout_below="@+id/textForBricks"
         android:inputType="number"
+        android:paddingLeft="5dp"
         />
     <EditText
         android:id="@+id/sizeOfBricks"
@@ -125,6 +128,7 @@
         android:layout_alignTop="@id/add"
         android:layout_marginRight="35dp"
         android:inputType="number"
+        android:paddingLeft="5dp"
         android:hint="@string/width"
         android:background="@drawable/background_for_edit_view" />
 
