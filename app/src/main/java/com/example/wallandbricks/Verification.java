@@ -1,6 +1,7 @@
 package com.example.wallandbricks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -21,15 +22,15 @@ public class Verification {
     /**
      * List of all brick widths sorted in descending order
      */
-    List<Integer> listSortedBricksByWidth;
+    private List<Integer> listSortedBricksByWidth;
     /**
      * Map, where keys are the brick widths and the values are their amounts
      */
-    Map<Integer,Integer> mapAmountOfBricksCertainWidth;
+    private Map<Integer,Integer> mapAmountOfBricksCertainWidth;
     /**
      * Comparator for sorting in descending order
      */
-    Comparator comparator = new Comparator<Integer>() {
+    private Comparator comparator = new Comparator<Integer>() {
         @Override
         public int compare(Integer o1, Integer o2) {
             return (o1 < o2) ? 1 : ((o1 == o2) ? 0 : -1);
@@ -113,5 +114,7 @@ public class Verification {
         }
         return result;
     }
+
+
 
 }

@@ -12,7 +12,7 @@ import java.util.Map;
  */
 
 public class VerificationLoader extends AsyncTaskLoader<Boolean> {
-    Verification verification;
+    private Verification verification;
 
     public VerificationLoader(Context context, Bundle bundle) {
         super(context);

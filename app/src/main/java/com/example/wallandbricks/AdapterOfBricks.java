@@ -20,9 +20,9 @@ import java.util.TreeMap;
 
 public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHolder> {
 
-    Map<Integer, Integer> mapOfBricks;
-    List<Integer> keys;
-    DataIsEmptyListener dataIsEmptyListener;
+    private Map<Integer, Integer> mapOfBricks;
+    private List<Integer> keys;
+    private DataIsEmptyListener dataIsEmptyListener;
 
     interface DataIsEmptyListener{
         void notifyDataIsEmpty(boolean b); //listener watches when data becomes empty
