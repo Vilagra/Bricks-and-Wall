@@ -4,6 +4,9 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.example.wallandbricks.entity.Brick;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +33,9 @@ public class VerificationLoader extends AsyncTaskLoader<Boolean> {
     public Verification getVerificationFromBundle(Bundle bundle){  //parse the bundle and get instance of verification class
         int h = bundle.getInt(Constants.HEIGHT);
         int w = bundle.getInt(Constants.WIDTH);
-        List<Integer> list = bundle.getIntegerArrayList(Constants.LIST_OF_WIDTH_BRICKS);
-        Map<Integer,Integer> map = (Map<Integer, Integer>) bundle.getSerializable(Constants.WIDTH_AND_AMOUNT_OF_BRICKS);
+
+        List<Brick> list = (List<Brick>) bundle.getSerializable(Constants.LIST_OF_WIDTH_BRICKS);
+        Map<Brick,Integer> map = (Map<Brick, Integer>) bundle.getSerializable(Constants.WIDTH_AND_AMOUNT_OF_BRICKS);
         return new Verification(w,h,map,list);
     }
 
