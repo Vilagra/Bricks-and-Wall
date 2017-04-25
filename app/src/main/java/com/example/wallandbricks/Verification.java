@@ -93,12 +93,6 @@ public class Verification {
                 }
             }
         }
-        for (Level level : levels) {
-            for (int i = 0; i < level.levelHeight; i++) {
-                System.out.println(Arrays.toString(level.levelField[i]));
-            }
-        }
-
         return true;
 
     }

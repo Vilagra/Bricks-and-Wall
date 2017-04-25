@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etWidthOfWall = (EditText) findViewById(R.id.widthWall);
         etHeightOfWall = (EditText) findViewById(R.id.heightWall);
         etAmountOfBricks = (EditText) findViewById(R.id.amountOfBricks);
-        etWidthOfBricks = (EditText) findViewById(R.id.sizeOfBricks);
+        etWidthOfBricks = (EditText) findViewById(R.id.widthOfBricks);
         TextWatcher textWatcher=new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

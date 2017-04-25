@@ -103,34 +103,48 @@
         android:layout_marginTop="20dp"
         android:textSize="25dp"
         android:text="@string/textForBricks" />
-
-
     <EditText
-        android:id="@+id/amountOfBricks"
-        android:layout_alignTop="@id/add"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:hint="@string/amount"
+        android:id="@+id/heightOfBricks"
         android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/background_for_edit_view"
-        android:layout_below="@+id/textForBricks"
-        android:inputType="number"
-        android:paddingLeft="5dp"
-        />
-    <EditText
-        android:id="@+id/sizeOfBricks"
-        android:layout_marginTop="10dp"
-        android:layout_width="70dp"
+        android:layout_width="60dp"
         android:layout_height="30dp"
         android:layout_below="@id/textForBricks"
-        android:layout_toLeftOf="@id/amountOfBricks"
+        android:layout_alignLeft="@id/buttonPanel"
         android:layout_alignTop="@id/add"
-        android:layout_marginRight="35dp"
+        android:inputType="number"
+        android:paddingLeft="5dp"
+        android:hint="@string/height"
+        android:background="@drawable/background_for_edit_view" />
+
+
+    <EditText
+        android:id="@+id/widthOfBricks"
+        android:layout_marginTop="10dp"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/textForBricks"
+        android:layout_toRightOf="@id/heightOfBricks"
+        android:layout_alignTop="@id/add"
+        android:layout_marginLeft="20dp"
         android:inputType="number"
         android:paddingLeft="5dp"
         android:hint="@string/width"
         android:background="@drawable/background_for_edit_view" />
+
+    <EditText
+        android:id="@+id/amountOfBricks"
+        android:layout_alignTop="@id/add"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:hint="@string/amount"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_for_edit_view"
+        android:layout_below="@+id/textForBricks"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/widthOfBricks"
+        android:inputType="number"
+        android:paddingLeft="5dp"
+        />
 
     <Button
         android:id="@+id/add"
@@ -138,10 +152,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textForBricks"
         android:layout_toRightOf="@id/amountOfBricks"
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="20dp"
         android:text="@string/add"
         android:textSize="15dp"
         android:textStyle="italic" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listOfBricks"
         android:layout_width="match_parent"

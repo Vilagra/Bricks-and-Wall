@@ -11,9 +11,9 @@ import java.util.HashMap;
  */
 
 public class Level {
-    public int levelHeight;
+    private int levelHeight;
     private int levelWidth;
-    public int[][] levelField;
+    private int[][] levelField;
 
     private int filledWidthLeftOnTheFloor;
     private int filledWidthLeftOnTheCeil;
