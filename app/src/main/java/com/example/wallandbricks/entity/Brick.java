@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by Vilagra on 25.04.2017.
  */
 
-public class Brick implements Parcelable,Serializable{
+public class Brick implements Parcelable, Serializable {
     private int height;
     private int width;
 
@@ -43,8 +43,8 @@ public class Brick implements Parcelable,Serializable{
         return width;
     }
 
-    public int getBrickArea(){
-        return width*height;
+    public int getBrickArea() {
+        return width * height;
     }
 
     @Override
