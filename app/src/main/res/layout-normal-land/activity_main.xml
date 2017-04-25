@@ -150,7 +150,7 @@
     <Button
         android:id="@+id/add"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="38dp"
         android:layout_below="@id/textForBricks"
         android:layout_toRightOf="@id/amountOfBricks"
         android:layout_marginLeft="35dp"

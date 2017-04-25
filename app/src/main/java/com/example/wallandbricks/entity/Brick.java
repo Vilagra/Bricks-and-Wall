@@ -1,10 +1,15 @@
 package com.example.wallandbricks.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by Vilagra on 25.04.2017.
  */
 
-public class Brick {
+public class Brick implements Parcelable,Serializable{
     private int height;
     private int width;
 
@@ -12,6 +17,23 @@ public class Brick {
         this.height = height;
         this.width = width;
     }
+
+    protected Brick(Parcel in) {
+        height = in.readInt();
+        width = in.readInt();
+    }
+
+    public static final Creator<Brick> CREATOR = new Creator<Brick>() {
+        @Override
+        public Brick createFromParcel(Parcel in) {
+            return new Brick(in);
+        }
+
+        @Override
+        public Brick[] newArray(int size) {
+            return new Brick[size];
+        }
+    };
 
     public int getHeight() {
         return height;
@@ -47,5 +69,16 @@ public class Brick {
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(height);
+        dest.writeInt(width);
     }
 }

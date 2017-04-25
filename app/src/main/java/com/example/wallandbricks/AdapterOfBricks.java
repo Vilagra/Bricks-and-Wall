@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.wallandbricks.entity.Brick;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +22,8 @@ import java.util.TreeMap;
 
 public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHolder> {
 
-    private Map<Integer, Integer> mapOfBricks;
-    private List<Integer> keys;
+    private Map<Brick, Integer> mapOfBricks;
+    private List<Brick> keys;
     private DataIsEmptyListener dataIsEmptyListener;
 
     interface DataIsEmptyListener{
@@ -38,19 +40,19 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
         keys=new ArrayList<>();
     }
 
-    public void setKeys(ArrayList<Integer> keys) {
+    public void setKeys(ArrayList<Brick> keys) {
         this.keys = keys;
     }
 
-    public void setMapOfBricks(Map<Integer, Integer> mapOfBricks) {
+    public void setMapOfBricks(Map<Brick, Integer> mapOfBricks) {
         this.mapOfBricks = mapOfBricks;
     }
 
-    public List<Integer> getKeys() {
+    public List<Brick> getKeys() {
         return keys;
     }
 
-    public Map<Integer, Integer> getMapOfBricks() {
+    public Map<Brick, Integer> getMapOfBricks() {
         return mapOfBricks;
     }
 
@@ -68,7 +70,7 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
         @Override
         public void onClick(View v) {               //delete bricks by this position
             int position = getAdapterPosition();
-            Integer key = keys.get(position);
+            Brick key = keys.get(position);
             keys.remove(position);
             mapOfBricks.remove(key);
             AdapterOfBricks.this.notifyDataSetChanged();
@@ -88,8 +90,8 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Integer key = keys.get(position);
-        holder.sizeAndAmountOfBricks.setText("Size:"+key+"   Amount: "+mapOfBricks.get(key));
+        Brick key = keys.get(position);
+        holder.sizeAndAmountOfBricks.setText("Height:"+key.getHeight()+" Width:"+ key.getWidth()+" Amount: "+mapOfBricks.get(key));
     }
 
     @Override
@@ -97,10 +99,10 @@ public class AdapterOfBricks extends RecyclerView.Adapter<AdapterOfBricks.ViewHo
         return keys.size();
     }
 
-    public void updateData(Integer size, Integer amount) {  //input new data, if data already exists it is replaced
-        keys.remove(size);
-        keys.add(size);
-        mapOfBricks.put(size,amount);
+    public void updateData(Brick brick, Integer amount) {  //input new data, if data already exists it is replaced
+        keys.remove(brick);
+        keys.add(brick);
+        mapOfBricks.put(brick,amount);
         notifyDataSetChanged();
     }
 

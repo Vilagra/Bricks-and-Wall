@@ -33,8 +33,7 @@ public class VerificationLoader extends AsyncTaskLoader<Boolean> {
     public Verification getVerificationFromBundle(Bundle bundle){  //parse the bundle and get instance of verification class
         int h = bundle.getInt(Constants.HEIGHT);
         int w = bundle.getInt(Constants.WIDTH);
-
-        List<Brick> list = (List<Brick>) bundle.getSerializable(Constants.LIST_OF_WIDTH_BRICKS);
+        List<Brick> list = bundle.getParcelableArrayList(Constants.LIST_OF_WIDTH_BRICKS);
         Map<Brick,Integer> map = (Map<Brick, Integer>) bundle.getSerializable(Constants.WIDTH_AND_AMOUNT_OF_BRICKS);
         return new Verification(w,h,map,list);
     }

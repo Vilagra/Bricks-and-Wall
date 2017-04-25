@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Loader;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.wallandbricks.entity.Brick;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText etHeightOfWall;
     private EditText etAmountOfBricks;
     private EditText etWidthOfBricks;
+    private EditText etHeightOfBricks;
     private Button bAdd;
     private Button bVerification;
     private Button bClear;
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etHeightOfWall = (EditText) findViewById(R.id.heightWall);
         etAmountOfBricks = (EditText) findViewById(R.id.amountOfBricks);
         etWidthOfBricks = (EditText) findViewById(R.id.widthOfBricks);
+        etHeightOfBricks = (EditText) findViewById(R.id.heightOfBricks);
         TextWatcher textWatcher=new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -56,11 +61,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(Editable s) { //if text in editText was changed update buttons
                 updateStateOfButton();
             }
         };
         etWidthOfBricks.addTextChangedListener(textWatcher);
+        etHeightOfBricks.addTextChangedListener(textWatcher);
         etHeightOfWall.addTextChangedListener(textWatcher);
         etWidthOfWall.addTextChangedListener(textWatcher);
         etAmountOfBricks.addTextChangedListener(textWatcher);
@@ -97,7 +103,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add:
-                adapterOfBricks.updateData(Integer.valueOf(etWidthOfBricks.getText().toString()), Integer.valueOf(etAmountOfBricks.getText().toString())); //adds bricks to recycler and updates state of button
+                int width=Integer.valueOf(etWidthOfBricks.getText().toString());
+                int heigth=Integer.valueOf(etHeightOfBricks.getText().toString());
+                adapterOfBricks.updateData(new Brick(heigth,width), Integer.valueOf(etAmountOfBricks.getText().toString())); //adds bricks to recycler and updates state of button
                 updateStateOfButton();
                 break;
             case R.id.clear:
@@ -105,8 +113,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 etWidthOfWall.setText("");
                 etAmountOfBricks.setText("");
                 etWidthOfBricks.setText("");
-                adapterOfBricks.setKeys(new ArrayList<Integer>());
-                adapterOfBricks.setMapOfBricks(new HashMap<Integer, Integer>());
+                etHeightOfWall.setText("");
+                adapterOfBricks.setKeys(new ArrayList<Brick>());
+                adapterOfBricks.setMapOfBricks(new HashMap<Brick, Integer>());
                 adapterOfBricks.notifyDataSetChanged();
                 break;
             case R.id.verification:
@@ -161,22 +170,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putIntegerArrayList(Constants.LIST_OF_WIDTH_BRICKS, (ArrayList<Integer>) adapterOfBricks.getKeys());
+        outState.putParcelableArrayList(Constants.LIST_OF_WIDTH_BRICKS, (ArrayList<? extends Parcelable>) adapterOfBricks.getKeys());
         outState.putSerializable(Constants.WIDTH_AND_AMOUNT_OF_BRICKS, (Serializable) adapterOfBricks.getMapOfBricks());
     }
 
 
 
     public void recoverState(Bundle saved){
-        adapterOfBricks.setKeys(saved.getIntegerArrayList(Constants.LIST_OF_WIDTH_BRICKS));
-        adapterOfBricks.setMapOfBricks((Map<Integer, Integer>) saved.getSerializable(Constants.WIDTH_AND_AMOUNT_OF_BRICKS));
+        adapterOfBricks.setKeys(saved.<Brick>getParcelableArrayList(Constants.LIST_OF_WIDTH_BRICKS));
+        adapterOfBricks.setMapOfBricks((Map<Brick, Integer>) saved.getSerializable(Constants.WIDTH_AND_AMOUNT_OF_BRICKS));
     }
 
     public Bundle getBundleWithData(){  //collect data for loader
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.WIDTH,Integer.valueOf(etWidthOfWall.getText().toString()));
         bundle.putInt(Constants.HEIGHT,Integer.valueOf(etHeightOfWall.getText().toString()));
-        bundle.putIntegerArrayList(Constants.LIST_OF_WIDTH_BRICKS, (ArrayList<Integer>) adapterOfBricks.getKeys());
+        bundle.putParcelableArrayList(Constants.LIST_OF_WIDTH_BRICKS, (ArrayList<? extends Parcelable>) adapterOfBricks.getKeys());
         bundle.putSerializable(Constants.WIDTH_AND_AMOUNT_OF_BRICKS, (Serializable) adapterOfBricks.getMapOfBricks());
         return bundle;
     }
@@ -185,11 +194,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boolean isEmptyWidthWall = etWidthOfWall.getText().toString().equals("");
         boolean isEmptyHeigthWall = etHeightOfWall.getText().toString().equals("");
         boolean isEmptyAmount = etAmountOfBricks.getText().toString().equals("");
-        boolean isEmptyWidtOfBricks = etWidthOfBricks.getText().toString().equals("");
+        boolean isEmptyWidthOfBricks = etWidthOfBricks.getText().toString().equals("");
+        boolean isEmptyHeightOfBricks = etHeightOfBricks.getText().toString().equals("");
         boolean isMapOfBricksEmpty = adapterOfBricks.getMapOfBricks().isEmpty();
         bVerification.setEnabled(!isEmptyWidthWall&&!isEmptyHeigthWall&&!isMapOfBricksEmpty);
-        bClear.setEnabled(!isEmptyWidthWall||!isEmptyHeigthWall||!isMapOfBricksEmpty||!isEmptyAmount||!isEmptyWidtOfBricks);
-        bAdd.setEnabled(!isEmptyAmount&&!isEmptyWidtOfBricks);
+        bClear.setEnabled(!isEmptyWidthWall||!isEmptyHeigthWall||!isMapOfBricksEmpty||!isEmptyAmount||!isEmptyWidthOfBricks||!isEmptyHeightOfBricks);
+        bAdd.setEnabled(!isEmptyAmount&&!isEmptyWidthOfBricks&&!isEmptyHeightOfBricks);
 
     }
 
