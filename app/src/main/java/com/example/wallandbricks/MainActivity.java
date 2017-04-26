@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button bVerification;
     private Button bClear;
 
-    boolean isNewLoad =false;  //watches for old data from loader not to show after rotation
+    boolean isLoderResultDelivered =true;
 
     private AdapterOfBricks adapterOfBricks;
     private ProgressDialog progressDialog;
@@ -96,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         progressDialog=new ProgressDialog(this);
         progressDialog.setTitle(getString(R.string.verification));
+        if(!isLoderResultDelivered){
+            progressDialog.show();
+        }
 
     }
 
@@ -120,9 +123,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.verification:
                 Bundle bundle= getBundleWithData();
-                getLoaderManager().restartLoader(Constants.LOADER_VER_ID,bundle,this).forceLoad(); //launches verification and shows Progress dialog in process
                 progressDialog.show();
-                isNewLoad=true;
+                isLoderResultDelivered=false;
+                getLoaderManager().restartLoader(Constants.LOADER_VER_ID,bundle,this).forceLoad(); //launches verification and shows Progress dialog in process
                 break;
         }
     }
@@ -137,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onLoadFinished(Loader<Boolean> loader, Boolean data) {
-        if(isNewLoad) {
+        if(!isLoderResultDelivered) {
             progressDialog.dismiss();                         //if we get a new result, dismisses progress dialog and shows result, if result is old nothing is displayed
             final AlertDialog.Builder alert = new AlertDialog.Builder(this);
             String msg;
@@ -160,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             messageText.setTextSize(25);
             dialog.show();
         }
+        isLoderResultDelivered=true;
     }
 
     @Override
@@ -172,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(Constants.LIST_OF_WIDTH_BRICKS, (ArrayList<? extends Parcelable>) adapterOfBricks.getKeys());
         outState.putSerializable(Constants.WIDTH_AND_AMOUNT_OF_BRICKS, (Serializable) adapterOfBricks.getMapOfBricks());
+        outState.putBoolean(Constants.IS_LOADER_RESULT_DELIVERED,isLoderResultDelivered);
     }
 
 
@@ -179,6 +184,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void recoverState(Bundle saved){
         adapterOfBricks.setKeys(saved.<Brick>getParcelableArrayList(Constants.LIST_OF_WIDTH_BRICKS));
         adapterOfBricks.setMapOfBricks((Map<Brick, Integer>) saved.getSerializable(Constants.WIDTH_AND_AMOUNT_OF_BRICKS));
+        isLoderResultDelivered = saved.getBoolean(Constants.IS_LOADER_RESULT_DELIVERED);
+
     }
 
     public Bundle getBundleWithData(){  //collect data for loader

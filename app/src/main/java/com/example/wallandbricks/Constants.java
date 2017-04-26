@@ -13,4 +13,5 @@ public class Constants {
     public final static String LIST_OF_WIDTH_BRICKS = "list of bricks";
 
 
+    public static final String IS_LOADER_RESULT_DELIVERED = "is loader result delivered";
 }
